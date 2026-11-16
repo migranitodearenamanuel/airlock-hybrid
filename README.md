@@ -28,7 +28,7 @@ Photos of documents (JPEG/PNG) are transcribed **on-device only**; images are ne
 | Product | Use |
 |---|---|
 | Firebase AI Logic (hybrid inference, `firebase/ai`) | `ONLY_ON_DEVICE` for raw data, `ONLY_IN_CLOUD` (+ Google Search grounding) for redacted data, structured output on-device |
-| App Check | Required by AI Logic (reCAPTCHA Enterprise in production, debug provider locally) |
+| App Check | Required by AI Logic (reCAPTCHA v3 in production, debug provider locally) |
 | Remote Config | Tunes routing thresholds (`max_local_tokens`, `cloud_model`, `strict_local_default`) without redeploying |
 | Authentication (anonymous) + Firestore | Per-user redacted history |
 | Hosting | Public demo |
@@ -47,7 +47,7 @@ npm run dev         # without .env.local the app runs in clearly-labelled DEMO m
 ### Connect Firebase (real models)
 1. Create a Firebase project → **AI Services › AI Logic › Get started** → choose **Gemini Developer API** (no-cost tier).
 2. Register a **Web app**, copy its config into `.env.local` (see `.env.example`).
-3. **App Check**: register the web app with **reCAPTCHA Enterprise**, put the site key in `.env.local`.
+3. **App Check**: register the web app with **reCAPTCHA v3** (free, create the key at https://www.google.com/recaptcha/admin), put the site key in `.env.local`.
    For local dev run the app, copy the *debug token* printed in the console and add it in
    **App Check › Apps › Manage debug tokens**. Make sure App Check is *Enforced* for AI Logic.
 4. Enable **Authentication › Anonymous** and create a **Firestore** database; deploy rules: `firebase deploy --only firestore:rules`.
