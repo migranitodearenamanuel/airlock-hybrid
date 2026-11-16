@@ -33,6 +33,8 @@ async function run() {
   $('btn-run').disabled = true;
   $('out').textContent = 'Working…';
   $('out').className = 'out muted';
+  const started = Date.now();
+  const tick = setInterval(() => { $('out').textContent = `Working… ${Math.round((Date.now() - started) / 1000)} s`; }, 1000);
   try {
     const res = await runAirlock({
       text: $('doc').value,
@@ -65,8 +67,13 @@ async function run() {
       $('btn-save').classList.add('hidden');
     }
   } catch (e) {
-    $('out').textContent = 'Error: ' + e.message;
+    console.error('[airlock] run failed', e);
+    $('out').textContent = '⚠️ ' + (e.message || String(e));
+    $('out').className = 'out error';
+    $('src').textContent = '';
+    $('btn-save').classList.add('hidden');
   } finally {
+    clearInterval(tick);
     $('btn-run').disabled = false;
   }
 }

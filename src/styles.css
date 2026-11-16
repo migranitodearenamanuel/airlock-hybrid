@@ -19,3 +19,4 @@ mark{background:#2d3b7a;color:#cfd8ff;border-radius:4px;padding:0 3px}
 .out{white-space:pre-wrap}.badge{font-size:12px;padding:2px 8px;border-radius:99px;background:#262c47}.badge.on_device{background:#173d2e;color:var(--ok)}.badge.in_cloud{background:#1d2a5c;color:var(--acc)}
 table{width:100%;font-size:13px}td{padding:3px 6px;border-bottom:1px solid #262c47}.steps li,.hist li{margin:4px 0}.hidden{display:none!important}
 footer{color:var(--mut);font-size:12px;text-align:center}
+.out.error{color:#fca5a5}

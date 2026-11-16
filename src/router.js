@@ -1,7 +1,10 @@
 // Routing policy for hybrid inference. Pure and unit-tested.
 export const DEFAULT_CONFIG = {
   maxLocalTokens: 6000, // Chrome on-device limit is 9216 tokens incl. output
-  cloudModel: 'gemini-3.8-flash',
+  cloudModel: 'gemini-3.5-flash-lite',
+  // Tried in order if the preferred model is overloaded, rate-limited or slow.
+  cloudFallbackModels: ['gemini-flash-lite-latest', 'gemini-3.5-flash'],
+  cloudDeadlineMs: 20000,
   strictLocalDefault: false,
 };
 

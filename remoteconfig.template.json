@@ -1,7 +1,7 @@
 {
   "parameters": {
     "max_local_tokens": { "defaultValue": { "value": "6000" }, "description": "Max estimated tokens routed to the on-device model" },
-    "cloud_model": { "defaultValue": { "value": "gemini-3.8-flash" }, "description": "Cloud fallback model" },
+    "cloud_model": { "defaultValue": { "value": "gemini-3.5-flash-lite" }, "description": "Cloud fallback model" },
     "strict_local_default": { "defaultValue": { "value": "false" }, "description": "Default state of the strict on-device switch" }
   }
 }

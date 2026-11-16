@@ -91,5 +91,8 @@ export async function runAirlock({ text = '', image = null, task = 'explain', en
   assertNoLeak(prompt, vault);
   const r = await engine.cloud(prompt, { grounding: TASKS[task].needsWeb });
   steps.push({ step: TASKS[task].label, source: r.source });
-  return { ...base, output: rehydrate(r.text, vault), source: r.source, sources: r.sources || [], egress: prompt, storable: r.text };
+  const reasons = r.groundingUnavailable
+    ? [...base.reasons, 'Web search grounding is not available on the free tier right now, so this check is based on the text only. Verify the sender through an official channel.']
+    : base.reasons;
+  return { ...base, reasons, output: rehydrate(r.text, vault), source: r.source, sources: r.sources || [], egress: prompt, storable: r.text, model: r.model };
 }
