@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Each (anonymous) user can only read/write their own redacted history.
+    match /users/{uid}/history/{doc} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['task','route','source','docType','text','at'])
+        && request.resource.data.text is string && request.resource.data.text.size() < 20000;
+    }
+  }
+}

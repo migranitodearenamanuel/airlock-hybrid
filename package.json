@@ -1,0 +1,21 @@
+{
+  "name": "airlock-hybrid",
+  "version": "0.1.0",
+  "description": "Airlock: privacy-safe hybrid AI for sensitive documents (Firebase AI Logic)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "firebase": "^13.3.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.17.0",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Airlock — private documents, hybrid AI</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="logo">⟁</span> Airlock</div>
+    <p class="tag">Understand bank letters, medical reports and tax notices with AI — your personal data never leaves your device unredacted.</p>
+    <div id="mode-banner" class="banner hidden"></div>
+  </header>
+
+  <main>
+    <section class="card status">
+      <div><span class="dot" id="dot-device"></span> On-device model: <b id="st-device">checking…</b></div>
+      <div><span class="dot" id="dot-net"></span> Network: <b id="st-net">…</b></div>
+      <button id="btn-init">Enable on-device model</button>
+      <progress id="dl" max="1" value="0" class="hidden"></progress>
+    </section>
+
+    <section class="card input">
+      <h2>1 · Your document</h2>
+      <textarea id="doc" rows="10" placeholder="Paste a letter, SMS, email or report…"></textarea>
+      <div class="row">
+        <label class="file">📷 Photo (JPEG/PNG, read on-device only)<input id="img" type="file" accept="image/png,image/jpeg" /></label>
+        <button id="btn-sample" class="ghost">Load sample</button>
+      </div>
+      <div class="row">
+        <select id="task"></select>
+        <label class="switch"><input type="checkbox" id="strict" /> Strict on-device (never use cloud)</label>
+        <button id="btn-run" class="primary">Run through Airlock</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2 · Route decision</h2>
+      <div id="route" class="route muted">—</div>
+      <ul id="reasons"></ul>
+      <ol id="steps" class="steps"></ol>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>3 · What left your device</h2>
+        <pre id="egress" class="egress muted">Nothing yet.</pre>
+        <details><summary>Protected items (<span id="n-ent">0</span>) — kept only in memory</summary><table id="ents"></table></details>
+      </div>
+      <div class="card">
+        <h2>4 · Answer <span id="src" class="badge"></span></h2>
+        <div id="out" class="out muted">—</div>
+        <ul id="cites" class="cites"></ul>
+        <button id="btn-save" class="ghost hidden">Save redacted copy to history</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>History <small>(redacted only, Firestore)</small></h2>
+      <ul id="hist" class="hist"></ul>
+    </section>
+  </main>
+  <footer>Built with Firebase AI Logic hybrid inference · Gemini Nano on-device · Gemini in the cloud · App Check · Remote Config · Firestore · Auth</footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
