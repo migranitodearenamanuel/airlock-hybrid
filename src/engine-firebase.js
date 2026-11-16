@@ -1,6 +1,6 @@
 // Real engine: Firebase AI Logic hybrid inference (Chrome Prompt API on-device + Gemini in the cloud).
 import { initializeApp } from 'firebase/app';
-import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaV3Provider, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { getAI, getGenerativeModel, GoogleAIBackend, InferenceMode } from 'firebase/ai';
 import { getRemoteConfig, fetchAndActivate, getValue } from 'firebase/remote-config';
 import { getAuth, signInAnonymously } from 'firebase/auth';
@@ -35,7 +35,10 @@ export async function createFirebaseEngine(env) {
   // the debug token is printed in the console and must be registered in the Firebase console.
   if (env.DEV || env.VITE_APPCHECK_DEBUG === 'true') self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider(env.VITE_RECAPTCHA_V3_SITE_KEY || 'debug'),
+    // Fraud Defense (reCAPTCHA Enterprise) is preferred; reCAPTCHA v3 classic is deprecated in App Check.
+    provider: env.VITE_RECAPTCHA_ENTERPRISE_SITE_KEY
+      ? new ReCaptchaEnterpriseProvider(env.VITE_RECAPTCHA_ENTERPRISE_SITE_KEY)
+      : new ReCaptchaV3Provider(env.VITE_RECAPTCHA_V3_SITE_KEY || 'debug'),
     isTokenAutoRefreshEnabled: true,
   });
 
